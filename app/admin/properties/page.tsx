@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Pagination } from '@/components/ui/Pagination';
 import { PropertiesHeaderActions } from './PropertiesHeaderActions';
 import { getDictionary } from '@/lib/i18n/getDictionary';
@@ -187,9 +188,9 @@ export default async function AdminPropertiesPage({ searchParams }: Props) {
                   )}
                 </div>
                 <div className="col-span-12 md:col-span-2 flex items-center justify-end gap-2">
-                  <button className="p-2 rounded-lg text-gray-400 hover:text-mosque hover:bg-hint-green/30 transition-all tooltip-trigger" title={d.editProperty}>
+                  <Link href={`/admin/properties/${prop.id}/edit`} className="p-2 rounded-lg text-gray-400 hover:text-mosque hover:bg-hint-green/30 transition-all tooltip-trigger" title={d.editProperty}>
                     <span className="material-icons text-xl">edit</span>
-                  </button>
+                  </Link>
                   <button className="p-2 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all tooltip-trigger" title={d.deleteProperty}>
                     <span className="material-icons text-xl">delete_outline</span>
                   </button>

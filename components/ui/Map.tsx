@@ -1,6 +1,6 @@
 'use client';
 
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { useEffect } from 'react';
@@ -22,6 +22,14 @@ interface Props {
   lng?: number;
 }
 
+function RecenterOnChange({ lat, lng }: { lat: number; lng: number }) {
+  const map = useMap();
+  useEffect(() => {
+    map.setView([lat, lng], map.getZoom());
+  }, [lat, lng, map]);
+  return null;
+}
+
 export default function Map({ lat = 37.4419, lng = -122.1430 }: Props) {
   useEffect(() => {
     // Some leaflet fixes
@@ -31,9 +39,9 @@ export default function Map({ lat = 37.4419, lng = -122.1430 }: Props) {
 
   return (
     <div className="w-full h-full rounded-lg overflow-hidden min-h-[300px] z-0 relative">
-      <MapContainer 
-        center={[lat, lng]} 
-        zoom={13} 
+      <MapContainer
+        center={[lat, lng]}
+        zoom={13}
         scrollWheelZoom={false}
         style={{ width: '100%', height: '100%' }}
       >
@@ -46,6 +54,7 @@ export default function Map({ lat = 37.4419, lng = -122.1430 }: Props) {
             Property Location
           </Popup>
         </Marker>
+        <RecenterOnChange lat={lat} lng={lng} />
       </MapContainer>
     </div>
   );

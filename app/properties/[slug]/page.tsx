@@ -14,6 +14,7 @@ import { COOKIE_NAME, Locale, defaultLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/getDictionary";
 
 import MapWrapper from '@/components/ui/MapWrapper';
+import MarkdownText from '@/components/ui/MarkdownText';
 
 export const revalidate = 3600; // ISR revalidate every hour
 
@@ -188,14 +189,16 @@ export default async function PropertyDetailsPage({ params }: Props) {
 
             <div className="bg-white dark:bg-white/5 p-8 rounded-xl shadow-sm border border-mosque/5 dark:border-white/10">
               <h2 className="text-lg font-semibold mb-4 text-nordic-dark dark:text-white">{dict.property.aboutThisHome}</h2>
-              <div className="prose prose-slate dark:prose-invert max-w-none text-nordic-muted leading-relaxed">
-                <p className="mb-4">
-                  {dict.property.description1}{property.location.split(',')[0]}{dict.property.description1Suffix}
-                </p>
-                <p>
-                  {dict.property.description2}
-                </p>
-              </div>
+              {property.description ? (
+                <MarkdownText>{property.description}</MarkdownText>
+              ) : (
+                <div className="text-nordic-muted leading-relaxed">
+                  <p className="mb-4">
+                    {dict.property.description1}{property.location.split(',')[0]}{dict.property.description1Suffix}
+                  </p>
+                  <p>{dict.property.description2}</p>
+                </div>
+              )}
               <button className="mt-4 text-mosque dark:text-primary font-semibold text-sm flex items-center gap-1 hover:gap-2 transition-all">
                 {dict.property.readMore}
                 <ArrowRight className="w-3.5 h-3.5" strokeWidth={2} />

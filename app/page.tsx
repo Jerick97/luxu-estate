@@ -36,7 +36,7 @@ export default async function Home({ searchParams }: Props) {
     .from('properties')
     .select('*')
     .eq('is_featured', true)
-    .order('created_at', { ascending: true })
+    .order('created_at', { ascending: false })
     .returns<DbProperty[]>();
 
   // Fetch paginated new-in-market properties with count
@@ -44,7 +44,7 @@ export default async function Home({ searchParams }: Props) {
     .from('properties')
     .select('*', { count: 'exact' })
     .eq('is_featured', false)
-    .order('created_at', { ascending: true })
+    .order('created_at', { ascending: false })
     .range(from, to);
 
   const query = params.query || "";

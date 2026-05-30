@@ -6,12 +6,15 @@ export interface Property {
   id: string;
   slug: string;
   title: string;
+  description?: string;
   location: string;
   price: number;
   period?: '/mo' | null;
   beds: number;
   baths: number;
   area: number;
+  parking?: number;
+  yearBuilt?: number;
   imageUrl: string;
   imageAlt: string;
   galleryUrls: string[];
@@ -29,12 +32,15 @@ export interface Property {
 export interface DbProperty {
   id: string;
   title: string;
+  description?: string;
   location: string;
   price: number;
   period?: "/mo" | null;
   beds: number;
   baths: number;
   area: number;
+  parking?: number;
+  year_built?: number;
   image_alt: string;
   status: string;
   type: string;
@@ -54,12 +60,15 @@ export function toProperty(row: DbProperty): Property {
     id: row.id,
     slug: row.slug,
     title: row.title,
+    description: row.description,
     location: row.location,
     price: row.price,
     period: row.period as "/mo" | undefined,
     beds: row.beds,
     baths: row.baths,
     area: row.area,
+    parking: row.parking,
+    yearBuilt: row.year_built,
     // Safely derive imageUrl from the first gallery item
     imageUrl: (row.gallery_urls && row.gallery_urls.length > 0) ? row.gallery_urls[0] : '',
     imageAlt: row.image_alt,

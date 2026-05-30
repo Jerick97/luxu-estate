@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { SearchFiltersModal } from '@/components/search/SearchFiltersModal';
 import { useTranslation } from '@/components/providers/I18nProvider';
 
@@ -17,9 +18,9 @@ export function PropertiesHeaderActions() {
         >
           <span className="material-icons text-base">filter_list</span> {t('admin.dashboard.filter')}
         </button>
-        <button className="bg-mosque hover:bg-mosque/90 text-white px-5 py-2.5 rounded-lg text-sm font-medium shadow-md shadow-mosque/20 transition-all transform hover:-translate-y-0.5 inline-flex items-center gap-2">
+        <Link href="/admin/properties/new" className="bg-mosque hover:bg-mosque/90 text-white px-5 py-2.5 rounded-lg text-sm font-medium shadow-md shadow-mosque/20 transition-all transform hover:-translate-y-0.5 inline-flex items-center gap-2">
           <span className="material-icons text-base">add</span> {t('admin.dashboard.addNewProperty')}
-        </button>
+        </Link>
       </div>
 
       <SearchFiltersModal 

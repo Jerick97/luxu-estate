@@ -135,7 +135,11 @@
         "price": "PRIX",
         "status": "STATUT",
         "actions": "ACTIONS"
-      }
+      },
+      "inactive": "Inactif",
+      "deactivateProperty": "Désactiver le Bien",
+      "activateProperty": "Activer le Bien",
+      "activateShort": "Activer"
     },
     "users": {
       "title": "Annuaire des Utilisateurs",

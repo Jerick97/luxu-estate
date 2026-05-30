@@ -23,6 +23,7 @@ export interface Property {
   featuredBadge?: FeaturedBadge | null;
 
   isFeatured?: boolean;
+  isActive?: boolean;
   lat?: number;
   lng?: number;
   amenities?: string[];
@@ -47,6 +48,7 @@ export interface DbProperty {
   featured_badge?: "Exclusive" | "New Arrival" | null;
   created_at?: string;
   is_featured?: boolean;
+  is_active?: boolean;
   slug: string;
   gallery_urls?: string[];
   lat?: number;
@@ -77,6 +79,7 @@ export function toProperty(row: DbProperty): Property {
     type: row.type as PropertyType,
     featuredBadge: row.featured_badge,
     isFeatured: row.is_featured,
+    isActive: row.is_active,
     lat: row.lat,
     lng: row.lng,
     amenities: row.amenities || [],

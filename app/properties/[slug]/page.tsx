@@ -28,6 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     .from('properties')
     .select('*')
     .eq('slug', resolvedParams.slug)
+    .eq('is_active', true)
     .single<DbProperty>();
 
   if (!data) return { title: 'Property Not Found' };
@@ -49,6 +50,7 @@ export default async function PropertyDetailsPage({ params }: Props) {
     .from('properties')
     .select('*')
     .eq('slug', resolvedParams.slug)
+    .eq('is_active', true)
     .single<DbProperty>();
 
   if (!data) {

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Pagination } from '@/components/ui/Pagination';
 import { PropertiesHeaderActions } from './PropertiesHeaderActions';
+import { PropertyActiveToggle } from './_components/PropertyActiveToggle';
 import { getDictionary } from '@/lib/i18n/getDictionary';
 import { Locale, COOKIE_NAME, defaultLocale } from '@/lib/i18n/config';
 
@@ -56,9 +57,13 @@ export default async function AdminPropertiesPage({ searchParams }: Props) {
     .order('created_at', { ascending: false })
     .range(from, to);
 
-  const query = params.query || "";
-  if (query) {
-    propertiesQuery = propertiesQuery.or(`title.ilike.%${query}%,location.ilike.%${query}%`);
+  // Normalize the free-text search term. Strip characters that would break the
+  // PostgREST `or()` filter syntax; `ilike` already handles case-insensitive,
+  // partial matching.
+  const query = (params.query || "").trim();
+  const safeQuery = query.replace(/[,()*]/g, ' ').trim();
+  if (safeQuery) {
+    propertiesQuery = propertiesQuery.or(`title.ilike.%${safeQuery}%,location.ilike.%${safeQuery}%`);
   }
   if (params.minPrice) propertiesQuery = propertiesQuery.gte('price', parseInt(params.minPrice));
   if (params.maxPrice) propertiesQuery = propertiesQuery.lte('price', parseInt(params.maxPrice));
@@ -144,21 +149,28 @@ export default async function AdminPropertiesPage({ searchParams }: Props) {
               ? prop.gallery_urls[0] 
               : "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=400";
               
+            const isInactive = prop.is_active === false;
+
             return (
-              <div key={prop.id} className="group grid grid-cols-1 md:grid-cols-12 gap-4 px-6 py-5 border-b border-gray-100 dark:border-mosque/10 hover:bg-background-light dark:hover:bg-mosque/5 transition-colors items-center">
+              <div key={prop.id} className={`group grid grid-cols-1 md:grid-cols-12 gap-4 px-6 py-5 border-b border-l-4 border-gray-100 dark:border-mosque/10 transition-colors items-center ${isInactive ? 'border-l-amber-400/70 bg-amber-50/40 dark:bg-amber-900/10 hover:bg-amber-50/70 dark:hover:bg-amber-900/15' : 'border-l-transparent hover:bg-background-light dark:hover:bg-mosque/5'}`}>
                 <div className="col-span-12 md:col-span-6 flex gap-4 items-center">
                   <div className="relative h-20 w-28 flex-shrink-0 rounded-lg overflow-hidden bg-gray-200">
-                    <Image 
-                      alt={prop.title || "Property image"} 
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                    <Image
+                      alt={prop.title || "Property image"}
+                      className={`h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 ${isInactive ? 'grayscale' : ''}`}
                       src={firstImage}
                       fill
                       sizes="(max-width: 768px) 112px, 112px"
                     />
+                    {isInactive && (
+                      <div className="absolute inset-0 bg-nordic/35 flex items-center justify-center">
+                        <span className="material-icons text-white/90 text-2xl drop-shadow">visibility_off</span>
+                      </div>
+                    )}
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-nordic dark:text-white group-hover:text-mosque transition-colors cursor-pointer truncate max-w-xs">{prop.title}</h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 truncate max-w-xs">{prop.location}</p>
+                    <h3 className={`text-lg font-bold truncate max-w-xs transition-colors cursor-pointer ${isInactive ? 'text-gray-400 dark:text-gray-500' : 'text-nordic dark:text-white group-hover:text-mosque'}`}>{prop.title}</h3>
+                    <p className={`text-sm truncate max-w-xs ${isInactive ? 'text-gray-400 dark:text-gray-500' : 'text-gray-500 dark:text-gray-400'}`}>{prop.location}</p>
                     <div className="flex items-center gap-3 mt-1.5 text-xs text-gray-400 dark:text-gray-500">
                       <span className="flex items-center gap-1"><span className="material-icons text-[14px]">bed</span> {prop.beds} {d.beds}</span>
                       <span className="w-1 h-1 rounded-full bg-gray-300"></span>
@@ -169,11 +181,15 @@ export default async function AdminPropertiesPage({ searchParams }: Props) {
                   </div>
                 </div>
                 <div className="col-span-6 md:col-span-2">
-                  <div className="text-base font-semibold text-nordic dark:text-gray-200">${prop.price?.toLocaleString()}</div>
+                  <div className={`text-base font-semibold ${isInactive ? 'text-gray-400 dark:text-gray-500' : 'text-nordic dark:text-gray-200'}`}>${prop.price?.toLocaleString()}</div>
                   <div className="text-xs text-gray-400 capitalize">{prop.type || 'property'}</div>
                 </div>
                 <div className="col-span-6 md:col-span-2">
-                  {prop.status === 'active' ? (
+                  {isInactive ? (
+                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
+                      <span className="material-icons text-[13px] leading-none">visibility_off</span> {d.inactive || 'Inactive'}
+                    </span>
+                  ) : prop.status === 'active' ? (
                     <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-hint-green text-mosque border border-mosque/10">
                       <span className="w-1.5 h-1.5 rounded-full bg-mosque mr-1.5"></span> {d.active}
                     </span>
@@ -191,9 +207,11 @@ export default async function AdminPropertiesPage({ searchParams }: Props) {
                   <Link href={`/admin/properties/${prop.id}/edit`} className="p-2 rounded-lg text-gray-400 hover:text-mosque hover:bg-hint-green/30 transition-all tooltip-trigger" title={d.editProperty}>
                     <span className="material-icons text-xl">edit</span>
                   </Link>
-                  <button className="p-2 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all tooltip-trigger" title={d.deleteProperty}>
-                    <span className="material-icons text-xl">delete_outline</span>
-                  </button>
+                  <PropertyActiveToggle
+                    propertyId={prop.id}
+                    isActive={prop.is_active !== false}
+                    labels={{ deactivate: d.deactivateProperty, activate: d.activateProperty, activateShort: d.activateShort }}
+                  />
                 </div>
               </div>
             );

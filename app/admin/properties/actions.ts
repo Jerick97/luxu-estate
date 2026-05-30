@@ -91,7 +91,7 @@ export async function createProperty(formData: FormData) {
     amenities,
     gallery_urls: galleryUrls,
     image_alt: title,
-    is_featured: false,
+    is_featured: formData.get('is_featured') === 'true',
   });
 
   if (error) {
@@ -164,6 +164,7 @@ export async function updateProperty(id: string, formData: FormData) {
     amenities,
     gallery_urls: galleryUrls,
     image_alt: title,
+    is_featured: formData.get('is_featured') === 'true',
   }).eq('id', id);
 
   if (error) {
@@ -173,6 +174,30 @@ export async function updateProperty(id: string, formData: FormData) {
 
   revalidatePath('/admin/properties');
   redirect('/admin/properties');
+}
+
+/**
+ * Soft-delete toggle. Instead of removing a property from the database we flip
+ * `is_active`. Inactive properties stay in the admin panel but are hidden from
+ * public search, the home screen and detail pages.
+ */
+export async function setPropertyActive(id: string, isActive: boolean) {
+  const cookieStore = await cookies();
+  const supabase = createSupabaseClient(cookieStore);
+
+  const { error } = await supabase
+    .from('properties')
+    .update({ is_active: isActive })
+    .eq('id', id);
+
+  if (error) {
+    console.error('Error updating property status:', error);
+    return { success: false, error: error.message };
+  }
+
+  revalidatePath('/admin/properties');
+  revalidatePath('/');
+  return { success: true, isActive };
 }
 
 export async function deletePropertyImage(propertyId: string, imageUrl: string) {

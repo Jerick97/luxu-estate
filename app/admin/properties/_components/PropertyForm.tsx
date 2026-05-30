@@ -84,6 +84,7 @@ interface PropertyFormProps {
     gallery_urls?: string[];
     lat?: number | null;
     lng?: number | null;
+    is_featured?: boolean;
   };
 }
 
@@ -103,6 +104,7 @@ export function PropertyForm({ mode, property }: PropertyFormProps) {
   const [geocodeError, setGeocodeError] = useState<string | null>(null);
   const [imgProcessing, setImgProcessing] = useState(false);
   const [price, setPrice] = useState<string>(property?.price != null ? String(property.price) : '');
+  const [isFeatured, setIsFeatured] = useState<boolean>(property?.is_featured ?? false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
@@ -209,6 +211,7 @@ export function PropertyForm({ mode, property }: PropertyFormProps) {
     formData.set('existing_gallery', JSON.stringify(galleryUrls));
     formData.set('lat', lat);
     formData.set('lng', lng);
+    formData.set('is_featured', isFeatured ? 'true' : 'false');
     formData.delete('images');
     previewFiles.forEach(p => formData.append('images', p.file));
 
@@ -300,6 +303,42 @@ export function PropertyForm({ mode, property }: PropertyFormProps) {
                     {PROPERTY_TYPES.map(t => <option key={t} value={t}>{t}</option>)}
                   </select>
                 </div>
+              </div>
+              <div className="pt-2">
+                <button
+                  type="button"
+                  role="switch"
+                  aria-checked={isFeatured}
+                  onClick={() => setIsFeatured(v => !v)}
+                  className={`w-full flex items-center justify-between gap-4 p-4 rounded-lg border transition-all text-left ${
+                    isFeatured
+                      ? 'border-mosque bg-hint-green/30 dark:bg-mosque/10 shadow-sm'
+                      : 'border-gray-200 dark:border-gray-600 bg-gray-50/50 dark:bg-gray-700/30 hover:border-mosque/40 hover:bg-hint-green/10'
+                  }`}
+                >
+                  <div className="flex items-start gap-3 min-w-0">
+                    <div className={`w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${
+                      isFeatured ? 'bg-mosque text-white' : 'bg-white dark:bg-gray-600 text-gray-400'
+                    }`}>
+                      <span className="material-icons text-lg">star</span>
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold text-nordic dark:text-white">Featured Property</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Highlight this listing in the Featured Collections.</p>
+                    </div>
+                  </div>
+                  <span
+                    className={`relative inline-flex h-6 w-11 flex-shrink-0 rounded-full transition-colors ${
+                      isFeatured ? 'bg-mosque' : 'bg-gray-300 dark:bg-gray-600'
+                    }`}
+                  >
+                    <span
+                      className={`inline-block h-5 w-5 bg-white rounded-full shadow transform transition-transform translate-y-0.5 ${
+                        isFeatured ? 'translate-x-5' : 'translate-x-0.5'
+                      }`}
+                    />
+                  </span>
+                </button>
               </div>
             </div>
           </div>

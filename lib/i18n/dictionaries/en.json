@@ -135,7 +135,11 @@
         "price": "PRICE",
         "status": "STATUS",
         "actions": "ACTIONS"
-      }
+      },
+      "inactive": "Inactive",
+      "deactivateProperty": "Deactivate Property",
+      "activateProperty": "Activate Property",
+      "activateShort": "Activate"
     },
     "users": {
       "title": "User Directory",

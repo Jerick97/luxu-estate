@@ -36,20 +36,34 @@ export default async function Home({ searchParams }: Props) {
     .from('properties')
     .select('*')
     .eq('is_featured', true)
+    .eq('is_active', true)
     .order('created_at', { ascending: false })
     .returns<DbProperty[]>();
 
-  // Fetch paginated new-in-market properties with count
+  // Normalize the free-text search term. Strip characters that would break the
+  // PostgREST `or()` filter syntax; `ilike` already handles case-insensitive,
+  // partial matching.
+  const query = (params.query || "").trim();
+  const safeQuery = query.replace(/[,()*]/g, ' ').trim();
+
+  const hasFilters = !!(query || params.minPrice || params.maxPrice || (params.type && params.type !== 'All') || params.beds || params.baths || params.amenities);
+
+  // Fetch paginated listings with count.
   let marketQuery = supabase
     .from('properties')
     .select('*', { count: 'exact' })
-    .eq('is_featured', false)
+    .eq('is_active', true)
     .order('created_at', { ascending: false })
     .range(from, to);
 
-  const query = params.query || "";
-  if (query) {
-    marketQuery = marketQuery.or(`title.ilike.%${query}%,location.ilike.%${query}%`);
+  // The "is_featured = false" split is only for the default browse view. When
+  // the user is searching/filtering we look across ALL active properties so
+  // featured listings are also matched.
+  if (!hasFilters) {
+    marketQuery = marketQuery.eq('is_featured', false);
+  }
+  if (safeQuery) {
+    marketQuery = marketQuery.or(`title.ilike.%${safeQuery}%,location.ilike.%${safeQuery}%`);
   }
   if (params.minPrice) marketQuery = marketQuery.gte('price', parseInt(params.minPrice));
   if (params.maxPrice) marketQuery = marketQuery.lte('price', parseInt(params.maxPrice));
@@ -66,8 +80,6 @@ export default async function Home({ searchParams }: Props) {
   const featuredProperties = (featuredRows ?? []).map(toProperty);
   const newInMarketProperties = (marketRows ?? []).map(toProperty);
   const totalPages = Math.ceil((count ?? 0) / PAGE_SIZE);
-
-  const hasFilters = !!(params.query || params.minPrice || params.maxPrice || (params.type && params.type !== 'All') || params.beds || params.baths || params.amenities);
 
   const cookieStore = await cookies();
   const locale = (cookieStore.get(COOKIE_NAME)?.value as Locale) || defaultLocale;

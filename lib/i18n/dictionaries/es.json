@@ -89,6 +89,57 @@
     "title": "Bienvenido a LuxeEstate",
     "subtitle": "Desbloquea propiedades exclusivas en todo el mundo."
   },
+  "profile": {
+    "memberSince": "Miembro desde",
+    "stats": {
+      "saved": "Guardadas",
+      "visits": "Visitas",
+      "sold": "Vendidas"
+    },
+    "tabs": {
+      "saved": "Propiedades Guardadas",
+      "visits": "Visitas Programadas",
+      "settings": "Preferencias y Ajustes"
+    },
+    "savedEmptyTitle": "Aún no tienes propiedades guardadas",
+    "savedEmptySubtitle": "Toca el corazón en cualquier anuncio para guardarlo aquí.",
+    "browseProperties": "Explorar propiedades",
+    "upcomingVisits": "Próximas Visitas",
+    "visitsEmptyTitle": "No tienes visitas próximas",
+    "visitsEmptySubtitle": "Agenda una visita desde cualquier propiedad y aparecerá aquí.",
+    "agent": "Agente",
+    "reschedule": "Reprogramar",
+    "getDirections": "Cómo llegar",
+    "accountPreferences": "Preferencias de la Cuenta",
+    "accountPreferencesSubtitle": "Administra los ajustes de tu cuenta y preferencias de correo",
+    "viewAllSettings": "Ver todos los ajustes",
+    "emailAddress": "Correo Electrónico",
+    "change": "Cambiar",
+    "notifications": "Notificaciones",
+    "newPropertyAlerts": "Alertas de Nuevas Propiedades"
+  },
+  "favorites": {
+    "title": "Tus Favoritos",
+    "youHave": "Tienes",
+    "propertyWaiting": "propiedad guardada esperándote.",
+    "propertiesWaiting": "propiedades guardadas esperándote.",
+    "sortBy": "Ordenar por",
+    "sortDateAdded": "Fecha agregada",
+    "sortPriceLow": "Precio: Menor a Mayor",
+    "sortPriceHigh": "Precio: Mayor a Menor",
+    "gridView": "Vista de cuadrícula",
+    "listView": "Vista de lista",
+    "forSale": "En Venta",
+    "forRent": "En Alquiler",
+    "bookVisit": "Reservar Visita",
+    "scheduleTour": "Agendar Tour",
+    "removeFavorite": "Quitar de favoritos",
+    "discoverMore": "Descubre Más",
+    "discoverMoreSubtitle": "Encuentra más propiedades que se adapten a tu estilo de vida.",
+    "browseListings": "Explorar Anuncios",
+    "emptyTitle": "Aún no tienes favoritos",
+    "emptySubtitle": "Empieza a explorar y toca el corazón para guardar las casas que te gusten."
+  },
   "admin": {
     "nav": {
       "dashboard": "Panel",

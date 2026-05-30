@@ -89,6 +89,57 @@
     "title": "Bienvenue à LuxeEstate",
     "subtitle": "Débloquez des propriétés exclusives dans le monde entier."
   },
+  "profile": {
+    "memberSince": "Membre depuis",
+    "stats": {
+      "saved": "Sauvegardés",
+      "visits": "Visites",
+      "sold": "Vendus"
+    },
+    "tabs": {
+      "saved": "Propriétés Sauvegardées",
+      "visits": "Visites Programmées",
+      "settings": "Préférences et Paramètres"
+    },
+    "savedEmptyTitle": "Aucune propriété sauvegardée",
+    "savedEmptySubtitle": "Touchez le cœur sur une annonce pour la retrouver ici.",
+    "browseProperties": "Parcourir les propriétés",
+    "upcomingVisits": "Visites à Venir",
+    "visitsEmptyTitle": "Aucune visite à venir",
+    "visitsEmptySubtitle": "Planifiez une visite depuis une propriété et elle apparaîtra ici.",
+    "agent": "Agent",
+    "reschedule": "Reprogrammer",
+    "getDirections": "Itinéraire",
+    "accountPreferences": "Préférences du Compte",
+    "accountPreferencesSubtitle": "Gérez les paramètres de votre compte et vos préférences d'e-mail",
+    "viewAllSettings": "Voir tous les paramètres",
+    "emailAddress": "Adresse E-mail",
+    "change": "Modifier",
+    "notifications": "Notifications",
+    "newPropertyAlerts": "Alertes Nouvelles Propriétés"
+  },
+  "favorites": {
+    "title": "Vos Favoris",
+    "youHave": "Vous avez",
+    "propertyWaiting": "propriété sauvegardée qui vous attend.",
+    "propertiesWaiting": "propriétés sauvegardées qui vous attendent.",
+    "sortBy": "Trier par",
+    "sortDateAdded": "Date d'ajout",
+    "sortPriceLow": "Prix : croissant",
+    "sortPriceHigh": "Prix : décroissant",
+    "gridView": "Vue grille",
+    "listView": "Vue liste",
+    "forSale": "À Vendre",
+    "forRent": "À Louer",
+    "bookVisit": "Réserver une Visite",
+    "scheduleTour": "Planifier une Visite",
+    "removeFavorite": "Retirer des favoris",
+    "discoverMore": "Découvrir Plus",
+    "discoverMoreSubtitle": "Trouvez plus de propriétés adaptées à votre style de vie.",
+    "browseListings": "Parcourir les Annonces",
+    "emptyTitle": "Aucun favori pour le moment",
+    "emptySubtitle": "Explorez et touchez le cœur pour sauvegarder les biens que vous aimez."
+  },
   "admin": {
     "nav": {
       "dashboard": "Tableau de bord",

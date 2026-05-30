@@ -89,6 +89,57 @@
     "title": "Welcome to LuxeEstate",
     "subtitle": "Unlock exclusive properties worldwide."
   },
+  "profile": {
+    "memberSince": "Member since",
+    "stats": {
+      "saved": "Saved",
+      "visits": "Visits",
+      "sold": "Sold"
+    },
+    "tabs": {
+      "saved": "Saved Properties",
+      "visits": "Scheduled Visits",
+      "settings": "Preferences & Settings"
+    },
+    "savedEmptyTitle": "No saved properties yet",
+    "savedEmptySubtitle": "Tap the heart on any listing to keep it here for later.",
+    "browseProperties": "Browse properties",
+    "upcomingVisits": "Upcoming Visits",
+    "visitsEmptyTitle": "No upcoming visits",
+    "visitsEmptySubtitle": "Schedule a tour from any property page and it will show up here.",
+    "agent": "Agent",
+    "reschedule": "Reschedule",
+    "getDirections": "Get Directions",
+    "accountPreferences": "Account Preferences",
+    "accountPreferencesSubtitle": "Manage your account settings and email preferences",
+    "viewAllSettings": "View all settings",
+    "emailAddress": "Email Address",
+    "change": "Change",
+    "notifications": "Notifications",
+    "newPropertyAlerts": "New Property Alerts"
+  },
+  "favorites": {
+    "title": "Your Favorites",
+    "youHave": "You have",
+    "propertyWaiting": "saved property waiting for you.",
+    "propertiesWaiting": "saved properties waiting for you.",
+    "sortBy": "Sort by",
+    "sortDateAdded": "Date Added",
+    "sortPriceLow": "Price: Low to High",
+    "sortPriceHigh": "Price: High to Low",
+    "gridView": "Grid view",
+    "listView": "List view",
+    "forSale": "For Sale",
+    "forRent": "For Rent",
+    "bookVisit": "Book Visit",
+    "scheduleTour": "Schedule Tour",
+    "removeFavorite": "Remove from favorites",
+    "discoverMore": "Discover More",
+    "discoverMoreSubtitle": "Find more properties that match your lifestyle.",
+    "browseListings": "Browse Listings",
+    "emptyTitle": "No favorites yet",
+    "emptySubtitle": "Start exploring and tap the heart to save the homes you love."
+  },
   "admin": {
     "nav": {
       "dashboard": "Dashboard",

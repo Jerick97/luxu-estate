@@ -93,7 +93,7 @@ export const Navbar = () => {
               {t("navbar.sell")}
               <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-0 bg-mosque/50 transition-all duration-300 ease-out group-hover:w-full rounded-full"></span>
             </Link>
-            <Link href="#" className="relative group text-nordic-dark/70 hover:text-nordic-dark font-medium text-sm px-1 py-1 transition-colors">
+            <Link href="/favorites" className="relative group text-nordic-dark/70 hover:text-nordic-dark font-medium text-sm px-1 py-1 transition-colors">
               {t("navbar.savedHomes")}
               <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-0 bg-mosque/50 transition-all duration-300 ease-out group-hover:w-full rounded-full"></span>
             </Link>
@@ -180,18 +180,18 @@ export const Navbar = () => {
                           <span className="font-semibold text-mosque">Admin Dashboard</span>
                         </Link>
                       )}
-                      <Link href="#" className="w-full flex items-center gap-2.5 px-3 py-2 text-sm text-nordic-dark dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/5 rounded-lg transition-colors text-left group">
+                      <Link href="/profile" onClick={() => setIsUserMenuOpen(false)} className="w-full flex items-center gap-2.5 px-3 py-2 text-sm text-nordic-dark dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/5 rounded-lg transition-colors text-left group">
                         <User className="w-4 h-4 text-nordic-dark/50 dark:text-gray-400 group-hover:text-mosque transition-colors" />
                         <span>{t("navbar.profile")}</span>
                       </Link>
-                      <Link href="#" className="w-full flex items-center gap-2.5 px-3 py-2 text-sm text-nordic-dark dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/5 rounded-lg transition-colors text-left group">
+                      <Link href="/favorites" onClick={() => setIsUserMenuOpen(false)} className="w-full flex items-center gap-2.5 px-3 py-2 text-sm text-nordic-dark dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/5 rounded-lg transition-colors text-left group">
                         <Heart className="w-4 h-4 text-nordic-dark/50 dark:text-gray-400 group-hover:text-mosque transition-colors" />
                         <span>{t("navbar.savedHomes")}</span>
                         {savedCount > 0 && (
                           <span className="ml-auto bg-mosque/10 text-mosque dark:bg-mosque/20 dark:text-mosque font-semibold text-[10px] px-2 py-0.5 rounded-full">{savedCount}</span>
                         )}
                       </Link>
-                      <Link href="#" className="w-full flex items-center gap-2.5 px-3 py-2 text-sm text-nordic-dark dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/5 rounded-lg transition-colors text-left group">
+                      <Link href="/profile?tab=settings" onClick={() => setIsUserMenuOpen(false)} className="w-full flex items-center gap-2.5 px-3 py-2 text-sm text-nordic-dark dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-white/5 rounded-lg transition-colors text-left group">
                         <Settings className="w-4 h-4 text-nordic-dark/50 dark:text-gray-400 group-hover:text-mosque transition-colors" />
                         <span>{t("navbar.settings")}</span>
                       </Link>
@@ -231,7 +231,7 @@ export const Navbar = () => {
           <Link href="#" className="block px-3 py-2 rounded-md text-base font-medium text-mosque bg-mosque/10">{t("navbar.buy")}</Link>
           <Link href="#" className="block px-3 py-2 rounded-md text-base font-medium text-nordic-dark hover:bg-black/5">{t("navbar.rent")}</Link>
           <Link href="#" className="block px-3 py-2 rounded-md text-base font-medium text-nordic-dark hover:bg-black/5">{t("navbar.sell")}</Link>
-          <Link href="#" className="flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-nordic-dark hover:bg-black/5">
+          <Link href="/favorites" className="flex justify-between items-center px-3 py-2 rounded-md text-base font-medium text-nordic-dark hover:bg-black/5">
             {t("navbar.savedHomes")}
             {savedCount > 0 && (
               <span className="bg-mosque/10 text-mosque dark:bg-mosque/20 dark:text-mosque font-semibold text-[10px] px-2 py-0.5 rounded-full">{savedCount}</span>

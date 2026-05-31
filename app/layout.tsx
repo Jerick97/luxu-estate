@@ -6,6 +6,7 @@ import { I18nProvider } from "@/components/providers/I18nProvider";
 import { SavedPropertiesProvider } from "@/components/providers/SavedPropertiesProvider";
 import { defaultLocale, Locale, COOKIE_NAME } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/getDictionary";
+import { getSiteUrl } from "@/lib/site";
 import "./globals.css";
 
 const sfPro = localFont({
@@ -39,9 +40,27 @@ const sfPro = localFont({
   variable: "--font-sf-pro",
 });
 
+const siteUrl = getSiteUrl();
+
 export const metadata: Metadata = {
-  title: "Luxu Estate Home Discover Screen",
-  description: "Find your sanctuary.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "LuxuEstate — Find your sanctuary",
+    template: "%s | LuxuEstate",
+  },
+  description: "Discover premium properties for sale and rent. Find your sanctuary.",
+  openGraph: {
+    type: "website",
+    siteName: "LuxuEstate",
+    url: siteUrl,
+    title: "LuxuEstate — Find your sanctuary",
+    description: "Discover premium properties for sale and rent. Find your sanctuary.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "LuxuEstate — Find your sanctuary",
+    description: "Discover premium properties for sale and rent. Find your sanctuary.",
+  },
 };
 
 export default async function RootLayout({

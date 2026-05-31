@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Building } from 'lucide-react'
 import { getDictionary } from '@/lib/i18n/getDictionary'
 import { cookies } from 'next/headers'
 import { AdminUserMenu } from '@/components/layout/AdminUserMenu'
@@ -16,8 +17,10 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         <div className="max-w-7xl mx-auto flex items-center justify-between h-16">
           <div className="flex items-center gap-8 lg:gap-12">
             <Link href="/admin" className="flex-shrink-0 flex items-center gap-2">
-              <span className="material-symbols-outlined text-mosque text-2xl">apartment</span>
-              <span className="font-bold text-lg text-nordic dark:text-white tracking-tight">LuxeEstate</span>
+              <div className="w-8 h-8 rounded-lg bg-nordic-dark flex items-center justify-center">
+                <Building className="text-white h-5 w-5" strokeWidth={2} />
+              </div>
+              <span className="font-bold text-lg text-nordic dark:text-white tracking-tight">LuxuEstate</span>
             </Link>
             <div className="hidden md:flex space-x-4 lg:space-x-8">
               <AdminNavLinks />

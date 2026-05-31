@@ -86,7 +86,7 @@
     "description2": "The open-concept kitchen is equipped with top-of-the-line appliances and custom cabinetry, perfect for culinary enthusiasts. Retreat to the primary suite, a sanctuary of relaxation with a spa-inspired bath and private balcony."
   },
   "login": {
-    "title": "Welcome to LuxeEstate",
+    "title": "Welcome to LuxuEstate",
     "subtitle": "Unlock exclusive properties worldwide."
   },
   "profile": {
@@ -146,10 +146,10 @@
       "listings": "Listings",
       "users": "Users"
     },
-    "copyright": "LuxeEstate Management. All rights reserved.",
+    "copyright": "LuxuEstate Management. All rights reserved.",
     "overview": {
       "title": "Dashboard Overview",
-      "subtitle": "Welcome to LuxeEstate Management.",
+      "subtitle": "Welcome to LuxuEstate Management.",
       "totalProperties": "Total Properties",
       "totalUsers": "Total Users",
       "adminStaff": "Admin Staff",

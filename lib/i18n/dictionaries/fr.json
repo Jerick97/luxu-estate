@@ -86,7 +86,7 @@
     "description2": "Cuisine équipée d'appareils haut de gamme. Suite parentale, vrai sanctuaire de relaxation avec balcon."
   },
   "login": {
-    "title": "Bienvenue à LuxeEstate",
+    "title": "Bienvenue à LuxuEstate",
     "subtitle": "Débloquez des propriétés exclusives dans le monde entier."
   },
   "profile": {
@@ -146,10 +146,10 @@
       "listings": "Annonces",
       "users": "Utilisateurs"
     },
-    "copyright": "LuxeEstate Management. Tous droits réservés.",
+    "copyright": "LuxuEstate Management. Tous droits réservés.",
     "overview": {
       "title": "Vue d'ensemble",
-      "subtitle": "Bienvenue sur LuxeEstate Management.",
+      "subtitle": "Bienvenue sur LuxuEstate Management.",
       "totalProperties": "Total Biens",
       "totalUsers": "Total Utilisateurs",
       "adminStaff": "Staff Admin",

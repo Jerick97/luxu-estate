@@ -86,7 +86,7 @@
     "description2": "La cocina de concepto abierto está equipada con electrodomésticos de primera línea y gabinetes personalizados. Refúgiate en la suite principal, un santuario de relajación con spa y balcón privado."
   },
   "login": {
-    "title": "Bienvenido a LuxeEstate",
+    "title": "Bienvenido a LuxuEstate",
     "subtitle": "Desbloquea propiedades exclusivas en todo el mundo."
   },
   "profile": {
@@ -146,10 +146,10 @@
       "listings": "Anuncios",
       "users": "Usuarios"
     },
-    "copyright": "LuxeEstate Management. Todos los derechos reservados.",
+    "copyright": "LuxuEstate Management. Todos los derechos reservados.",
     "overview": {
       "title": "Panel General",
-      "subtitle": "Bienvenido a LuxeEstate Management.",
+      "subtitle": "Bienvenido a LuxuEstate Management.",
       "totalProperties": "Total Propiedades",
       "totalUsers": "Total Usuarios",
       "adminStaff": "Staff Admin",

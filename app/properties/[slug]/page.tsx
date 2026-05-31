@@ -15,6 +15,7 @@ import { getDictionary } from "@/lib/i18n/getDictionary";
 
 import MapWrapper from '@/components/ui/MapWrapper';
 import MarkdownText from '@/components/ui/MarkdownText';
+import { getSiteUrl } from '@/lib/site';
 
 export const revalidate = 3600; // ISR revalidate every hour
 
@@ -32,15 +33,34 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     .single<DbProperty>();
 
   if (!data) return { title: 'Property Not Found' };
-  
+
   const property = toProperty(data);
 
+  const title = property.title;
+  const description = `Discover ${property.title} in ${property.location}. ${property.beds} beds, ${property.baths} baths, offered at $${property.price.toLocaleString()}.`;
+  const path = `/properties/${property.slug}`;
+  const imageAlt = property.imageAlt || property.title;
+
   return {
-    title: `${property.title} | LuxuEstate`,
-    description: `Discover ${property.title} in ${property.location}. ${property.beds} beds, ${property.baths} baths, offered at $${property.price.toLocaleString()}.`,
+    title,
+    description,
+    alternates: { canonical: path },
     openGraph: {
-      images: [{ url: property.imageUrl }],
-    }
+      type: 'website',
+      url: path,
+      siteName: 'LuxuEstate',
+      title,
+      description,
+      images: property.imageUrl
+        ? [{ url: property.imageUrl, alt: imageAlt }]
+        : undefined,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: property.imageUrl ? [property.imageUrl] : undefined,
+    },
   };
 }
 
@@ -73,7 +93,7 @@ export default async function PropertyDetailsPage({ params }: Props) {
     '@type': 'RealEstateListing',
     name: property.title,
     description: `Property in ${property.location} with ${property.beds} beds and ${property.baths} baths.`,
-    url: `${process.env.NEXT_PUBLIC_SITE_URL || ''}/properties/${property.slug}`,
+    url: `${getSiteUrl()}/properties/${property.slug}`,
     image: property.imageUrl,
     offers: {
       '@type': 'Offer',

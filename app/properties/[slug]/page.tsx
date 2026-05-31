@@ -41,6 +41,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const path = `/properties/${property.slug}`;
   const imageAlt = property.imageAlt || property.title;
 
+  // Expose every gallery image as an og:image. Platforms that support
+  // multiple images (e.g. Facebook) will offer all of them; most others
+  // (Slack, X, WhatsApp, LinkedIn) just use the first one.
+  const galleryUrls =
+    property.galleryUrls && property.galleryUrls.length > 0
+      ? property.galleryUrls
+      : property.imageUrl
+        ? [property.imageUrl]
+        : [];
+
+  const ogImages = galleryUrls.map((url) => ({ url, alt: imageAlt }));
+
   return {
     title,
     description,
@@ -51,15 +63,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: 'LuxuEstate',
       title,
       description,
-      images: property.imageUrl
-        ? [{ url: property.imageUrl, alt: imageAlt }]
-        : undefined,
+      images: ogImages.length > 0 ? ogImages : undefined,
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: property.imageUrl ? [property.imageUrl] : undefined,
+      images: galleryUrls.length > 0 ? galleryUrls : undefined,
     },
   };
 }
